@@ -14,12 +14,15 @@ def adicionar_cliente(nome, email, CPF):
 def menu():
     print("1. Adicionar cliente.")
     print("2. Listar clientes.")
+    print("3. Atualizar cliente.")
     opcao =input("Escolha uma opção: ")
 
     if opcao == "1":
         main()
     elif opcao == "2":
         listar_clientes()
+    elif opcao == "3":
+        atualizar()
     else:
         print("Opção inválida.")
 
@@ -36,6 +39,24 @@ def listar_clientes():
 
     cursor.close()
     connection.close()
+
+def atualizar_cliente(nome, email, CPF):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    query = "UPDATE clientes SET email = %s, CPF = %s WHERE nome = %s" 
+    cursor.execute(query, (email, CPF, nome))
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+def atualizar():
+    nome = input("Digite o nome do cliente a ser atualizado: ")
+    email = input("Digite o novo email do cliente: ")
+    CPF = input("Digite o novo CPF do cliente: ")
+    atualizar_cliente(nome, email, CPF)
+    print("Cliente atualizado com sucesso!")
+
 
 def main():
     nome = input("Digite o nome do cliente: ")
