@@ -11,12 +11,17 @@ def adicionar_cliente(nome, email, CPF):
     cursor.close()
     connection.close()
 
-def main():
-    nome = input("Digite o nome do cliente: ")
-    email = input("Digite o email do cliente: ")
-    CPF = input("Digite o CPF do cliente: ")
-    adicionar_cliente(nome, email, CPF)
-    print("Cliente adicionado com sucesso!")
+def menu():
+    print("1. Adicionar cliente.")
+    print("2. Listar clientes.")
+    opcao =input("Escolha uma opção: ")
+
+    if opcao == "1":
+        main()
+    elif opcao == "2":
+        listar_clientes()
+    else:
+        print("Opção inválida.")
 
 def listar_clientes():
     connection = get_connection()
@@ -32,5 +37,13 @@ def listar_clientes():
     cursor.close()
     connection.close()
 
+def main():
+    nome = input("Digite o nome do cliente: ")
+    email = input("Digite o email do cliente: ")
+    CPF = input("Digite o CPF do cliente: ")
+    adicionar_cliente(nome, email, CPF)
+    print("Cliente adicionado com sucesso!")
+
+
 if __name__ == "__main__":
-    main()
+    menu()
