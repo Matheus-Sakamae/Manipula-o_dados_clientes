@@ -1,3 +1,9 @@
 CREATE DATABASE clientes_dados;
 USE clientes_dados;
 
+CREATE TABLE clientes(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL, 
+    email VARCHAR(100) NOT NULL UNIQUE,
+    CPF VARCHAR(11) NOT NULL UNIQUE
+);
