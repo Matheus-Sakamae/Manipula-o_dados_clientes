@@ -15,6 +15,8 @@ def menu():
     print("1. Adicionar cliente.")
     print("2. Listar clientes.")
     print("3. Atualizar cliente.")
+    print("4. Deletar cliente.")
+    
     opcao =input("Escolha uma opção: ")
 
     if opcao == "1":
@@ -23,6 +25,8 @@ def menu():
         listar_clientes()
     elif opcao == "3":
         atualizar()
+    elif opcao == "4":
+        apagar()
     else:
         print("Opção inválida.")
 
@@ -57,6 +61,21 @@ def atualizar():
     atualizar_cliente(nome, email, CPF)
     print("Cliente atualizado com sucesso!")
 
+def deletar_cliente(nome):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    query = "DELETE FROM clientes WHERE nome = %s"
+    cursor.execute(query, (nome,))
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
+def apagar():
+    nome = input("Digite o nome do cliente a ser deletado: ")
+    deletar_cliente(nome)
+    print("Cliente deletado com sucesso!")
 
 def main():
     nome = input("Digite o nome do cliente: ")
